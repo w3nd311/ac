@@ -1,9 +1,9 @@
 {
-  "name": "tutorial",
+  "name": "ac",
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/w3nd311/ac.git"
   },
   "scripts": {
     "start": "nodemon server.js",
