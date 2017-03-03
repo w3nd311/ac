@@ -8,10 +8,16 @@ var app			= express();
 var bodyParser 	= require('body-Parser');
 var morgan		= require('morgan');
 
-// config app
-app.use(morgan('dev')); // log requests to the console
+var Aluno 					= require('./app/models/aluno');
+var AlunoController 		= require('./app/controllers/alunoController');
 
 // conectar ao BD
+var mongoose 	= require('mongoose');
+mongoose.Promise = global.Promise; // n sei o que é mas se tirar nao funciona
+mongoose.connect('mongodb://wendell:batata@ds113630.mlab.com:13630/ursos');
+
+// config app
+app.use(morgan('dev')); // mostra requisiçoes no console
 
 // config app pra usar bodyparser
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -34,12 +40,12 @@ router.get('/', function(req, res){
 	res.json({ message: 'funcionando'});
 });
 
-// mais rotas vao aparecer aqui
-
-// rotas que terminam com /alunos
-//---------------------------------------------------------------------------------
-
-
+// rotas
+router.post('/alunos', AlunoController.PostAluno);
+router.get('/alunos', AlunoController.GetAlunos);
+router.put('/alunos/:id', AlunoController.UpdateAluno);
+router.delete('/alunos/:id', AlunoController.DeleteAluno);
+router.get('/alunos/:id', AlunoController.GetAlunoById);
 
 // registro de rotas =======================================================
 

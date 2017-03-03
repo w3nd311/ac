@@ -1,7 +1,9 @@
-var chai = require('chai');
-var chaiHttp = require('chai-http');
-var should = chai.should;
-var expect = chai.expect;
+var chai 		= require('chai');
+var chaiHttp 	= require('chai-http');
+var should 		= chai.should;
+var expect 		= chai.expect;
+var sinon		= require('sinon');
+var Aluno 		= require('../app/models/aluno');
 
 var server = 'http://localhost:8080/api';
 
