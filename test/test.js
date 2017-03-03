@@ -20,4 +20,34 @@ describe('teste api', function() {
 		});
 	});
 
+	describe('GET todos os alunos', function() {
+
+	    it('should return todos os alunos', function(done) {
+	      var AlunoMock = sinon.mock(Aluno);
+	      var expectedResult = {status: true, Alunos: [] };
+	      AlunoMock.expects('find').yields(null, expectedResult);
+	      Aluno.find(function(err, result) {
+	      	AlunoMock.verify();
+	      	AlunoMock.restore();
+	      	expect(result.status).to.be.true;
+	      	done();
+	      });
+	    });
+
+	    it('should return error', function(done) {
+	      var AlunoMock = sinon.mock(Aluno);
+	      var expectedResult = {status: false, error: "algo deu errado" };
+	      AlunoMock.expects('find').yields(expectedResult, null);
+	      Aluno.find(function(err, result) {
+	      	AlunoMock.verify();
+	      	AlunoMock.restore();
+	      	expect(err.status).to.not.be.true;
+	      	done();
+	      });
+	    });
+
+    });
+
+	
+
 });
